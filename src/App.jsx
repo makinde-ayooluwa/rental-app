@@ -1,3 +1,9 @@
-function App() {return <h1>Hello World</h1>}
+import Header from "./components/user/Header";
 
-export default App
+function App() {
+  return <div className="bg-amber-100">
+<Header/>
+  </div>
+}
+
+export default App;
