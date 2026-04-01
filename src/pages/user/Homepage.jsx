@@ -43,19 +43,21 @@ const mockListings = [
       "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800",
   },
   {
-  id: 5,
-  title: "Mini Flat",
-  location: "Surulere, Lagos",
-  price: "₦800,000 / year",
-  image: "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800",
-},
-{
-  id: 6,
-  title: "3 Bedroom Flat",
-  location: "Ajah, Lagos",
-  price: "₦1,500,000 / year",
-  image: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=800",
-}
+    id: 5,
+    title: "Mini Flat",
+    location: "Surulere, Lagos",
+    price: "₦800,000 / year",
+    image:
+      "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?q=80&w=800",
+  },
+  {
+    id: 6,
+    title: "3 Bedroom Flat",
+    location: "Ajah, Lagos",
+    price: "₦1,500,000 / year",
+    image:
+      "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?q=80&w=800",
+  },
 ];
 
 export default function Homepage() {
@@ -74,10 +76,14 @@ export default function Homepage() {
     localStorage.setItem("recentlyViewed", JSON.stringify(updated));
   };
 
+  // Split listings
+  const featured = mockListings.slice(0, 2);
+  const mostViewed = mockListings.slice(2).reverse();
+
   const Card = ({ item }) => (
     <div
       onClick={() => handleView(item)}
-      className="min-w-[250px] bg-white rounded-2xl shadow-md overflow-hidden mr-4 cursor-pointer hover:shadow-lg transition"
+      className="w-full bg-white rounded-2xl shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition"
     >
       <img
         src={item.image}
@@ -92,19 +98,8 @@ export default function Homepage() {
     </div>
   );
 
-  // Split listings
-  const featured = mockListings.slice(0, 2);
-  const mostViewed = mockListings.slice(2).reverse();
-
-  // Filter remaining
-  const remainingListings = mockListings.filter(
-    (item) =>
-      !featured.some((f) => f.id === item.id) &&
-      !mostViewed.some((m) => m.id === item.id),
-  );
-
   return (
-    <div className="p-5 bg-gray-100 min-h-screen">
+    <div className="p-5 bg-gray-100 min-h-screen overflow-x-hidden">
       {/* HEADER */}
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Find Your Next Rental</h1>
@@ -116,7 +111,7 @@ export default function Homepage() {
       {/* CATEGORIES */}
       <div className="mb-6">
         <h1 className="font-bold mb-2">CATEGORIES</h1>
-        <div className="flex overflow-x-auto space-x-3 pb-2">
+        <div className="flex overflow-x-auto gap-3 pb-2">
           {categories.map((cat, index) => (
             <div
               key={index}
@@ -128,12 +123,14 @@ export default function Homepage() {
         </div>
       </div>
 
-      {/* FEATURED LISTINGS */}
+      {/* FEATURED */}
       <div className="mb-6">
         <h1 className="font-bold mb-2">FEATURED</h1>
         <div className="flex overflow-x-auto gap-3">
           {featured.map((item) => (
-            <Card key={item.id} item={item} />
+            <div key={item.id} className="min-w-[250px]">
+              <Card item={item} />
+            </div>
           ))}
         </div>
       </div>
@@ -143,7 +140,9 @@ export default function Homepage() {
         <h1 className="font-bold mb-2">MOST VIEWED</h1>
         <div className="flex overflow-x-auto gap-3">
           {mostViewed.map((item) => (
-            <Card key={item.id} item={item} />
+            <div key={item.id} className="min-w-[250px]">
+              <Card item={item} />
+            </div>
           ))}
         </div>
       </div>
@@ -154,18 +153,30 @@ export default function Homepage() {
           <h1 className="font-bold mb-2">RECENTLY VIEWED</h1>
           <div className="flex overflow-x-auto gap-3">
             {recentlyViewed.map((item) => (
-              <Card key={item.id} item={item} />
+              <div key={item.id} className="min-w-[250px]">
+                <Card item={item} />
+              </div>
             ))}
           </div>
         </div>
       )}
+
+      {/* ALL LISTINGS */}
       <div className="mb-6">
         <h1 className="font-bold mb-2">ALL LISTINGS</h1>
-        <div className="grid grid-cols-4 gap-4">
+
+        <div
+          className="
+          grid 
+          grid-cols-1 
+          sm:grid-cols-2 
+          md:grid-cols-3 
+          lg:grid-cols-4 
+          gap-4
+        "
+        >
           {mockListings.map((item) => (
-            <div key={item.id}>
-              <Card item={item} />
-            </div>
+            <Card key={item.id} item={item} />
           ))}
         </div>
       </div>
