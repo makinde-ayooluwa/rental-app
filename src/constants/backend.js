@@ -1,1 +1,1 @@
-export const backendUrl = "http:/localhost/rental-app-backend";
+export const backendUrl = "http://localhost/rental-app-backend";

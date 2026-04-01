@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { User } from "../../contexts/Context";
+import axios from "axios";
+import { backendUrl } from "../../constants/backend";
 
 export default function Login() {
   const [form, setForm] = useState({
@@ -8,16 +10,19 @@ export default function Login() {
     password: "",
   });
 
-  const {user, setUser} = useContext(User);
+  const { user, setUser } = useContext(User);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setUser({...form, password:"*************"})
     // Add your login API here
+    const response = await axios.post(`${backendUrl}/login`, form, true);
+    const data = await response.data;
+        setUser({...data, password:"************"});
+        console.log(data)
   };
 
   return (
