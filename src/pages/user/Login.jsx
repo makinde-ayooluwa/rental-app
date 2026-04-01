@@ -22,7 +22,6 @@ export default function Login() {
     const response = await axios.post(`${backendUrl}/login`, form, true);
     const data = await response.data;
         setUser({...data, password:"************"});
-        console.log(data)
   };
 
   return (
