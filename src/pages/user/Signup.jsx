@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   const [form, setForm] = useState({
@@ -70,7 +71,9 @@ export default function Signup() {
         </form>
         <p className="mt-4 text-center text-white/70 text-sm">
           Already have an account?{" "}
-          <span className="text-cyan-400 cursor-pointer">Login</span>
+          <span className="text-cyan-400 cursor-pointer">
+            <Link to="/login">Login</Link>
+          </span>
         </p>
       </div>
 
