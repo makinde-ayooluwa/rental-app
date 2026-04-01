@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
+import { User } from "../../contexts/Context";
 
 export default function Login() {
   const [form, setForm] = useState({
@@ -7,13 +8,15 @@ export default function Login() {
     password: "",
   });
 
+  const {user, setUser} = useContext(User);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Logged in as ${form.email}`);
+    setUser({...form, password:"*************"})
     // Add your login API here
   };
 
