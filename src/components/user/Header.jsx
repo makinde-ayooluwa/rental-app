@@ -13,7 +13,7 @@ export default function Header() {
       {/* Logo */}
       <div className="flex items-center">
         <img src="/vite.svg" alt="Food App Logo" className="h-10 w-auto" />
-        <span className="ml-2 font-bold text-xl text-red-700">HouseMate</span>
+        <span className="ml-2 font-bold text-xl text-red-700 hidden md:block">HouseMate</span>
       </div>
 
       {/* Navigation Links */}
